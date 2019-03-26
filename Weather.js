@@ -56,13 +56,13 @@ const weatherCases = {
     Drizzle: {
         colors: ["#89F7FE", "#66A6FF"],
         title: "Drizzle",
-        subtitle: "Is like rain",
+        subtitle: "It's like rain",
         icon: "weather-hail"
     },
     Haze: {
         colors: ["#89F7FE", "#66A6FF"],
         title: "Haze",
-        subtitle: "Haze..",
+        subtitle: "How about driving?",
         icon: "weather-windy"
     },
     Mist: {
@@ -73,12 +73,13 @@ const weatherCases = {
     }
 }
 
-function Weather({ weatherName, temp }) {
+function Weather({ weatherName, temp, localName, nation }) {
     return(
         <LinearGradient colors={weatherCases[weatherName].colors} style={styles.container}>
             <View style={styles.upper}>
                 <MaterialCommunityIcons color="white" size={144} name={weatherCases[weatherName].icon} />
                 <Text style={styles.temp}>{ temp }˚</Text>
+                <Text style={styles.subinfo}>{ localName }, { nation }</Text>
             </View>
             <View style={styles.lower}>
                 <Text style={styles.title}>{weatherCases[weatherName].title}</Text>
@@ -110,6 +111,12 @@ const styles = StyleSheet.create({
         backgroundColor: "transparent",
         color: "white",
         marginTop: 10
+    },
+    subinfo: {
+        fontSize: 30,
+        backgroundColor: "transparent",
+        color: "white",
+        marginTop: 5
     },
     lower: {
         flex: 1,

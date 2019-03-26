@@ -9,7 +9,9 @@ export default class App extends React.Component {
     isLoaded: false,
     error: null,
     temperature: null,
-    name: null
+    name: null,
+    localName: null,
+    nation: null
   };
   componentDidMount() {
     navigator.geolocation.getCurrentPosition(position => {
@@ -28,7 +30,9 @@ export default class App extends React.Component {
       this.setState({
         temperature: json.main.temp,
         name: json.weather[0].main,
-        isLoaded: true
+        isLoaded: true,
+        localName: json.name,
+        nation: json.sys.country
       });
     });
   }
@@ -38,7 +42,12 @@ export default class App extends React.Component {
       <View style={styles.container}>
         <StatusBar hidder={true} />
         {isLoaded ? (
-          <Weather weatherName={this.state.name} temp={Math.ceil(this.state.temperature - 273.15)} />
+          <Weather 
+            weatherName={this.state.name} 
+            temp={Math.ceil(this.state.temperature - 273.15)}
+            localName={this.state.localName}
+            nation={this.state.nation}
+          />
           ) : (
           <View style={styles.loading}>
             <Text style={styles.loadingText}>Getting the weather</Text>
